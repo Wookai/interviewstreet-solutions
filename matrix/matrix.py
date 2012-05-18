@@ -33,7 +33,7 @@ costs = {}
 
 def prune(root):
     nodesList = [root]
-    seenNodes = []
+    seenNodes = {}
     
     minCost = None
     minEdge = None 
@@ -42,7 +42,7 @@ def prune(root):
         node = getNode(nodesList.pop(0))
         
         # keep seen nodes
-        seenNodes.append(node.id)
+        seenNodes[node.id] = True
         
         # if lonely node, remove and skip it
         if len(node.neighbors) == 0:
@@ -58,20 +58,20 @@ def prune(root):
         else:
             for n in node.neighbors:
                 # don't consider same node twice
-                if n in seenNodes:
+                if seenNodes.get(n, False):
                     continue
                 
                 neighbor = getNode(n)
                 edge = getKey(node.id, n)
                 
                 # remove leaves that have no machines
-                if len(neighbor.neighbors) == 1 and n not in machines:
+                if len(neighbor.neighbors) == 1 and not machines.get(n, False):
                     # delete node
                     node.neighbors.remove(n)
                     nodes.pop(n)
                     # also delete edge
                     costs.pop(edge)
-                elif (len(neighbor.neighbors) > 1 or n in machines) and n not in nodesList:
+                elif (len(neighbor.neighbors) > 1 or machines.get(n, False)) and n not in nodesList:
                     nodesList.append(n)
                     # keep min cost edge
                     cost = costs[edge]
@@ -106,11 +106,11 @@ for i in range(N - 1):
         key = '%d-%d' % (node2.id, node1.id)
     costs[key] = line[2]
     
-machines = []
+machines = {}
 # read machines
 for i in range(K):
     line = sys.stdin.readline().strip()
-    machines.append(int(line))
+    machines[int(line)] = True
     
 cost = 0
 while len(roots) > 0:

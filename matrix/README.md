@@ -1,5 +1,5 @@
-Matrix (25 pts)
-===============
+Matrix (25 Points)
+==================
 
 https://www.interviewstreet.com/challenges/dashboard/#problem/4f904e704e404
 
@@ -11,7 +11,7 @@ Since the attack can be at any time from now, Neo has to do this task as fast as
 
 You need to write a program that tells Neo the minimum amount of time he will require to disrupt the connection among machines.
 
-Sample Input**
+**Sample Input**
 
 First line of the input contains two, space-separated integers, N and K. Cities are numbered 0 to N-1.
 Then follow N-1 lines, each containing three, space-separated integers, x y z, which means there is a bidirectional road connecting city x and city y, and to destroy this road it takes z units of time.

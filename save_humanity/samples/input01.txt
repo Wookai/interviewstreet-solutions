@@ -1,0 +1,9 @@
+3
+abbab
+ba
+
+hello
+world
+
+banana
+nan
